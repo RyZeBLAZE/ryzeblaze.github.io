@@ -10,45 +10,96 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
+            overflow-x: hidden; /* Allow vertical scrolling but prevent horizontal */
             background-color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
             font-family: Arial, sans-serif;
             font-style: italic;
             font-weight: bold;
-            font-size: 48px;
+            color: white;
         }
 
+        /* Scrollable content container */
+        .content-container {
+            position: relative;
+            z-index: 2;
+            display: block;
+            width: 100%;
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        /* Fixed stars background */
         #stars {
-            position: absolute;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 150%;
             height: 150%;
             background: url('https://www.transparenttextures.com/patterns/stardust.png');
             background-size: contain;
             pointer-events: none;
             will-change: transform;
-            transition: transform 0.2s ease-out;
             opacity: 0.8;
             filter: brightness(5.5);
         }
 
-        .container {
+        .glass-bar {
             position: relative;
-            z-index: 2;
-            text-align: center;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 900px;
+            height: 60px;
+            background: rgba(30, 30, 30, 0.3);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: white;
+            font-size: 24px;
+            font-weight: normal;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-bar .discord-button {
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 8px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .glass-bar .discord-button:hover {
+            background-color: #71368a;
+        }
+
+        .glass-panel {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 1000px;
+            padding: 30px;
+            background: rgba(50, 50, 50, 0.4);
+            border-radius: 50px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            color: white;
         }
 
         .regular-text {
             font-size: 48px;
-            color: white;
+            text-align: center;
         }
 
         .small-text {
             font-size: 17px;
-            color: white;
+            text-align: center;
             margin-top: 10px;
         }
 
@@ -60,7 +111,6 @@
         }
 
         .download-section {
-            margin-top: 40px;
             text-align: center;
         }
 
@@ -86,103 +136,68 @@
             font-weight: bold;
         }
 
-        .glass-panel {
-            position: relative;
-            z-index: 1;
-            width: 90%;
-            max-width: 1000px;
-            padding: 30px;
-            background: rgba(50, 50, 50, 0.2);
-            border-radius: 50px;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-            margin: 20px;
-            color: white;
-        }
-        
         .download-button:hover {
             background-color: #71368a;
         }
 
-        .glass-bar {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            max-width: 900px;
-            height: 60px;
-            background: rgba(30, 30, 30, 0.3);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            color: white;
-            font-size: 24px;
-            font-weight: normal;
-            border-radius: 30px;
-            box-sizing: border-box;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        .disclaimer-section .regular-text {
+            font-size: 32px;
+            text-align: center;
         }
 
-
-        .glass-bar .text {
-            font-size: 24px;
-        }
-
-        .glass-bar .discord-button {
-            background-color: #8e44ad;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            padding: 8px 15px;
+        .disclaimer-section .small-text {
+            text-align: left;
+            margin-top: 20px;
             font-size: 16px;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: none;
-            white-space: nowrap;
-        }
-
-        .glass-bar .discord-button:hover {
-            background-color: #71368a;
+            line-height: 1.6;
         }
 
         .footnote {
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
             text-align: center;
             font-size: 8px;
             color: white;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
     <div id="stars"></div>
-    <div class="glass-bar">
-        <div class="text">Asterisks menu</div>
-        <a href="https://discord.gg/PxTeu9HYdc" class="discord-button" target="_blank">Join Discord</a>
-    </div>
-    
-    <div class="glass-panel">
-        <div class="container">
-            <div class="regular-text">Asterisk gg</div>
-            <div class="small-text">made by Asterisk him self</div>
+    <div class="content-container">
+        <!-- Glass bar at the top -->
+        <div class="glass-bar">
+            <div class="text">Asterisks menu</div>
+            <a href="https://discord.gg/PxTeu9HYdc" class="discord-button" target="_blank">Join Discord</a>
+        </div>
 
-            <div class="divider"></div>
-
-            <div class="download-section">
-                <div class="download-title">Asterisk Custom Launcher</div>
-                <div class="download-description">
-                    My first ever custom Gorilla Tag launcher!<br>
-                    Instead of downloading a dll, you can use my launcher.<br>
-                    Inject the DLL from the launcher, and you will have the latest update of our menu, without the need to manually use a dll<br> 
-                    <a href="https://tutorial-here" target="_blank">TUTORIAL HERE.</a>
+        <!-- Main glass panel -->
+        <div class="glass-panel">
+            <div class="container">
+                <div class="regular-text">Asterisk gg</div>
+                <div class="small-text">made by Asterisk him self</div>
+                <div class="divider"></div>
+                <div class="download-section">
+                    <div class="download-title">Asterisk Custom Launcher</div>
+                    <div class="download-description">
+                        My first ever custom Gorilla Tag launcher!<br>
+                        Instead of downloading a dll, you can use my launcher.<br>
+                        Inject the DLL from the launcher, and you will have the latest update of our menu, without the need to manually use a dll.<br>
+                        <a href="https://tutorial-here" target="_blank">TUTORIAL HERE.</a>
+                    </div>
+                    <a href="https://tutorial-here" class="download-button" target="_blank">Download Now</a>
+                    <a href="https://how-to-use-link" class="download-button" target="_blank" style="margin-top: 10px;">How to Use</a>
                 </div>
-                <a href="https://tutorial-here" class="download-button" target="_blank">Download Now</a>
-                <a href="https://how-to-use-link" class="download-button" target="_blank" style="margin-top: 10px;">How to Use</a>
+            </div>
+        </div>
+
+        <!-- Disclaimer Section -->
+        <div class="glass-panel disclaimer-section">
+            <div class="container">
+                <div class="regular-text">⚠ DISCLAIMER</div>
+                <div class="small-text">
+                    We are not responsible if you get banned using Steal mod menu or any other menu. We run our menu through tests before release; if we notice anything, we fix it as quickly as we can.<br><br>
+                    We collect diagnostics while you're using the mod so we can pinpoint bugs and address them as quickly as possible. If you want to turn this off, you'll need to go into your Steal settings and change it.<br><br>
+                    We store certain device and network info like IP addresses and Hardware IDs (as does everyone else, including Symex, Shiba, etc.). There is no way to turn this off. If you feel it's unsafe to keep your information with us, please don't purchase. There is no need to worry about your data when using Steal; we use industry-standard encryption and secure data storage.
+                </div>
             </div>
         </div>
     </div>
@@ -190,16 +205,5 @@
     <div class="footnote">
         This product is not affiliated with Gorilla Tag or Another Axiom LLC and is not endorsed or otherwise sponsored by Another Axiom LLC. Portions of the materials contained herein are property of Another Axiom LLC. © 2021 Another Axiom LLC.
     </div>
-    
-    <script>
-        document.addEventListener('mousemove', function(e) {
-            const stars = document.getElementById('stars');
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-            const moveX = (mouseX - 0.5) * 30;
-            const moveY = (mouseY - 0.5) * 30;
-            stars.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        });
-    </script>
 </body>
 </html>

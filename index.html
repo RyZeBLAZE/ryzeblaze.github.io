@@ -127,35 +127,34 @@
             background-color: #9c27b0;
         }
 
-        /* Services Section */
-        .services {
-            padding: 100px 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Discord Widget Section */
+        .discord-widget {
             text-align: center;
-        }
-        .service-card {
-            background-color: #3d0077; /* Dark purple card background */
-            padding: 30px;
+            margin: 50px 0;
+            padding: 20px;
+            background-color: #3d0077; /* Dark purple background */
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        .service-card h3 {
+        .discord-widget h2 {
+            color: #8e24aa; /* Purple text */
             font-size: 2rem;
             margin-bottom: 20px;
-            color: #8e24aa; /* Purple text */
+            font-family: 'Montserrat', sans-serif;
         }
-        .service-card p {
-            font-size: 1.1rem;
-            color: #d1a7d1; /* Light purple text */
+        .discord-widget .btn {
+            background-color: #8e24aa; /* Purple button */
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .discord-widget .btn:hover {
+            background-color: #9c27b0; /* Lighter purple on hover */
         }
 
         /* Footer Section */
@@ -174,17 +173,6 @@
         }
         footer a:hover {
             color: #fff;
-        }
-
-        /* Smooth Scrolling Animation */
-        section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
     </style>
 </head>
@@ -214,40 +202,42 @@
         </div>
     </div>
 
-    <section class="services">
-        <div class="service-card">
-            <h3>Exclusive Tracking</h3>
-            <p>Track famous players like J-Man, Curly, and more! Get real-time notifications and join the conversation.</p>
+    <!-- Discord Widget Section -->
+    <div class="discord-widget">
+        <h2>Join Our Discord Community</h2>
+        <div id="discord-info">
+            <p>Loading server information...</p>
         </div>
-        <div class="service-card">
-            <h3>Custom Mods</h3>
-            <p>Enhance your Gorilla Tag experience with custom mods. Unlock exclusive cosmetics, special skins, and more.</p>
-        </div>
-        <div class="service-card">
-            <h3>Community Events</h3>
-            <p>Participate in events, contests, and giveaways. Win prizes and get featured in our community spotlight!</p>
-        </div>
-    </section>
+    </div>
 
     <footer>
         <p>Follow us on <a href="YOUR_TWITTER_LINK" target="_blank">Twitter</a> or <a href="YOUR_INSTAGRAM_LINK" target="_blank">Instagram</a>!</p>
     </footer>
 
     <script>
-        // Smooth scroll effect for visibility
-        const sections = document.querySelectorAll("section");
+        const discordWidgetURL = "https://discord.com/api/guilds/1249399625950171166/widget.json";
 
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
+        fetch(discordWidgetURL)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to load Discord widget data");
                 }
-            });
-        }, { threshold: 0.1 });
+                return response.json();
+            })
+            .then(data => {
+                const discordInfoDiv = document.getElementById("discord-info");
+                const { name, presence_count, instant_invite } = data;
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
+                discordInfoDiv.innerHTML = `
+                    <p><strong>Server Name:</strong> ${name}</p>
+                    <p><strong>Online Members:</strong> ${presence_count}</p>
+                    <a href="${instant_invite}" class="btn" target="_blank">Join Now</a>
+                `;
+            })
+            .catch(error => {
+                document.getElementById("discord-info").innerHTML = `<p>Error loading Discord data. Please try again later.</p>`;
+                console.error("Error fetching Discord widget:", error);
+            });
     </script>
 </body>
 </html>

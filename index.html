@@ -65,17 +65,17 @@
 </head>
 <body>
     <div class="container">
-        <h2 style="color: white;">Enter Password to Get the Gen</h2>
+        <h2 style="color: white;">Enter licence key</h2>
         <input type="password" id="passwordInput" placeholder="Enter Password">
         <button onclick="checkPassword()">Submit</button>
-        <button id="genButton" onclick="generate()">Get Gen</button>
+        <button id="genButton" onclick="generate()">Get accounts</button>
         <p id="message" style="color: white;"></p>
     </div>
 
     <script>
         function checkPassword() {
             const password = document.getElementById("passwordInput").value;
-            const correctPassword = "1234"; // Change this to your actual password
+            const correctPassword = "VanitySux"; // Change this to your actual password
             
             if (password === correctPassword) {
                 document.getElementById("genButton").style.display = "block";

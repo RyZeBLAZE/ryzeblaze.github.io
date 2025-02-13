@@ -3,241 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gorilla Tag Server & Services</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Password Protected Gen</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #2b0e6f; /* Dark purple background */
-            color: #f0f0f0;
-            overflow-x: hidden;
-        }
-        h1, h2 {
-            font-family: 'Montserrat', sans-serif;
-        }
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background-image: url('https://source.unsplash.com/1600x900/?forest,game'); /* Background image */
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: Arial, sans-serif;
             text-align: center;
-            padding: 0 20px;
-            color: white;
-            position: relative;
+            margin: 50px;
+            background: url('your-background-image.jpg') no-repeat center center fixed;
+            background-size: cover;
         }
-        .hero-overlay {
-            position: absolute;
+        
+        body::before {
+            content: "";
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            filter: blur(8px);
+            z-index: -1;
         }
-        .hero-content {
-            z-index: 10;
-        }
-        h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        .promo-text {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .btn {
-            background-color: #8e24aa; /* Purple button */
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            text-decoration: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #9c27b0; /* Lighter purple on hover */
-            transform: translateY(-3px);
-        }
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        /* Account Sale Section */
-        .account-sale {
-            background-color: #3d0077; /* Dark purple section */
-            padding: 60px 20px;
-            text-align: center;
-        }
-        .account-sale h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: #8e24aa; /* Purple text */
-        }
-        .account-sale p {
-            font-size: 1.2rem;
-            color: #d1a7d1; /* Light purple text */
-            margin-bottom: 30px;
-        }
-        .price-card {
-            display: inline-block;
-            background-color: #1d004b; /* Darker purple */
-            padding: 20px;
-            margin: 10px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .price-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        .price-card h3 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: #8e24aa; /* Purple price */
-        }
-        .price-card p {
-            font-size: 1.2rem;
-            color: #f0f0f0;
-            margin-bottom: 20px;
-        }
-        .price-card a {
-            display: inline-block;
-            background-color: #8e24aa;
-            color: white;
+        
+        #genButton {
+            display: none;
+            margin-top: 20px;
             padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .price-card a:hover {
-            background-color: #9c27b0;
-        }
-
-        /* Discord Widget Section */
-        .discord-widget {
-            text-align: center;
-            margin: 50px 0;
-            padding: 20px;
-            background-color: #3d0077; /* Dark purple background */
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        .discord-widget h2 {
-            color: #8e24aa; /* Purple text */
-            font-size: 2rem;
-            margin-bottom: 20px;
-            font-family: 'Montserrat', sans-serif;
-        }
-        .discord-widget .btn {
-            background-color: #8e24aa; /* Purple button */
+            background-color: blue;
             color: white;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 10px;
-            transition: background-color 0.3s ease;
-        }
-        .discord-widget .btn:hover {
-            background-color: #9c27b0; /* Lighter purple on hover */
-        }
-
-        /* Footer Section */
-        footer {
-            background-color: #2b0e6f; /* Dark purple footer */
-            color: #bbb;
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-        }
-        footer a {
-            color: #8e24aa; /* Purple links */
-            text-decoration: none;
-            margin: 0 10px;
-            transition: color 0.3s ease;
-        }
-        footer a:hover {
-            color: #fff;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1>Join Our Gorilla Tag Community</h1>
-            <p class="promo-text">Track famous players, unlock exclusive cosmetics, and be part of the most exciting Gorilla Tag events and mods!</p>
-            <a href="YOUR_DISCORD_INVITE_LINK" class="btn">Join Our Discord Server</a>
-        </div>
-    </div>
-
-    <!-- Account Sale Section -->
-    <div class="account-sale">
-        <h2>Gorilla Tag Accounts & Tracker for Sale</h2>
-        <p>Get exclusive Gorilla Tag accounts and the player tracker. All transactions are done through our Discord server. Prices are in USD.</p>
-        <div class="price-card">
-            <h3>Gorilla Tag Tracker - $10 USD</h3>
-            <p>Unlock the ability to track famous players, see cosmetics, and join real-time events.</p>
-            <a href="YOUR_DISCORD_INVITE_LINK" target="_blank">Buy Now via Discord</a>
-        </div>
-        <div class="price-card">
-            <h3>Gorilla Tag Accounts</h3>
-            <p>Basic, Mid-tier, and Premium accounts are available on our Discord server. Prices vary.</p>
-            <a href="YOUR_DISCORD_INVITE_LINK" target="_blank">Join Our Discord to Buy</a>
-        </div>
-    </div>
-
-    <!-- Discord Widget Section -->
-    <div class="discord-widget">
-        <h2>Join Our Discord Community</h2>
-        <div id="discord-info">
-            <p>Loading server information...</p>
-        </div>
-    </div>
-
-    <footer>
-        <p>Follow us on <a href="YOUR_TWITTER_LINK" target="_blank">Twitter</a> or <a href="YOUR_INSTAGRAM_LINK" target="_blank">Instagram</a>!</p>
-    </footer>
+    <h2>Enter Password to Get the Gen</h2>
+    <input type="password" id="passwordInput" placeholder="Enter Password">
+    <button onclick="checkPassword()">Submit</button>
+    <button id="genButton" onclick="generate()">Get Gen</button>
+    <p id="message"></p>
 
     <script>
-        const discordWidgetURL = "https://discord.com/api/guilds/1249399625950171166/widget.json";
+        function checkPassword() {
+            const password = document.getElementById("passwordInput").value;
+            const correctPassword = "1234"; // Change this to your actual password
+            
+            if (password === correctPassword) {
+                document.getElementById("genButton").style.display = "block";
+                document.getElementById("message").innerText = "Access Granted!";
+            } else {
+                document.getElementById("message").innerText = "Wrong Password!";
+            }
+        }
 
-        fetch(discordWidgetURL)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Failed to load Discord widget data");
-                }
-                return response.json();
-            })
-            .then(data => {
-                const discordInfoDiv = document.getElementById("discord-info");
-                const { name, presence_count, instant_invite } = data;
-
-                discordInfoDiv.innerHTML = `
-                    <p><strong>Server Name:</strong> ${name}</p>
-                    <p><strong>Online Members:</strong> ${presence_count}</p>
-                    <a href="${instant_invite}" class="btn" target="_blank">Join Now</a>
-                `;
-            })
-            .catch(error => {
-                document.getElementById("discord-info").innerHTML = `<p>Error loading Discord data. Please try again later.</p>`;
-                console.error("Error fetching Discord widget:", error);
-            });
+        function generate() {
+            alert("Here is your gen!"); // Replace with actual generator function
+        }
     </script>
 </body>
 </html>

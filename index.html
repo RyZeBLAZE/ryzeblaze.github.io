@@ -61,6 +61,22 @@
         #genButton {
             display: none;
         }
+
+        .loader {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid blue;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -69,6 +85,7 @@
         <input type="password" id="passwordInput" placeholder="Enter Password">
         <button onclick="checkPassword()">Submit</button>
         <button id="genButton" onclick="generate()">Get accounts</button>
+        <div class="loader" id="loader"></div>
         <p id="message" style="color: white;"></p>
     </div>
 
@@ -86,7 +103,12 @@
         }
 
         function generate() {
-            alert("Here is your gen!"); // Replace with actual generator function
+            document.getElementById("genButton").style.display = "none";
+            document.getElementById("loader").style.display = "block";
+            
+            setTimeout(() => {
+                window.location.href = "accounts.html"; // Redirect to new page after loading
+            }, 3000); // 3-second loading animation
         }
     </script>
 </body>

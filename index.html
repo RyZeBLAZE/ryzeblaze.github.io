@@ -8,8 +8,12 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 50px;
-            background: url('background.jpg') no-repeat center center fixed;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('your-background-image.jpg') no-repeat center center fixed;
             background-size: cover;
         }
         
@@ -25,23 +29,48 @@
             z-index: -1;
         }
         
-        #genButton {
-            display: none;
-            margin-top: 20px;
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        input[type="password"] {
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            background: #111;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            width: 200px;
+            outline: none;
+        }
+        
+        button {
+            margin-top: 10px;
             padding: 10px 20px;
             background-color: blue;
             color: white;
             border: none;
+            border-radius: 20px;
             cursor: pointer;
+        }
+        
+        #genButton {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <h2>Enter Password to Get the Gen</h2>
-    <input type="password" id="passwordInput" placeholder="Enter Password">
-    <button onclick="checkPassword()">Submit</button>
-    <button id="genButton" onclick="generate()">Get Gen</button>
-    <p id="message"></p>
+    <div class="container">
+        <h2 style="color: white;">Enter Password to Get the Gen</h2>
+        <input type="password" id="passwordInput" placeholder="Enter Password">
+        <button onclick="checkPassword()">Submit</button>
+        <button id="genButton" onclick="generate()">Get Gen</button>
+        <p id="message" style="color: white;"></p>
+    </div>
 
     <script>
         function checkPassword() {
